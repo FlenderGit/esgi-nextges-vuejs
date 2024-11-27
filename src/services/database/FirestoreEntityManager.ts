@@ -1,5 +1,4 @@
 import {
-  getFirestore,
   collection,
   getDocs,
   doc,
@@ -7,11 +6,13 @@ import {
   setDoc,
   updateDoc,
   deleteDoc,
+  Firestore,
 } from 'firebase/firestore'
 
 import { AbstractEntityManager } from '../AbstractEntityManager'
+import type { Entity } from '../Entity'
 
-export class FirestoreEntityManager<T> extends AbstractEntityManager<T> {
+export class FirestoreEntityManager<T extends Entity> extends AbstractEntityManager<T> {
   constructor(
     private database: Firestore,
     collectionName: string,

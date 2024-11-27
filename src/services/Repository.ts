@@ -1,7 +1,8 @@
 import type { AbstractEntityManager } from './AbstractEntityManager'
+import type { Entity } from './Entity'
 import type { IDatabase } from './IDatabase'
 
-export class Repository<T> {
+export class Repository<T extends Entity> {
   private entityManager: AbstractEntityManager<T>
 
   constructor(db: IDatabase, entityName: string) {

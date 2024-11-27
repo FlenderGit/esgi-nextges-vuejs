@@ -1,5 +1,6 @@
 import type { AbstractEntityManager } from './AbstractEntityManager'
+import type { Entity } from './Entity'
 
 export interface IDatabase {
-  getEntityManager<T>(entityName: string): AbstractEntityManager<T>
+  getEntityManager<T extends Entity>(entityName: string): AbstractEntityManager<T>
 }
