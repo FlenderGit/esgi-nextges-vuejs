@@ -5,15 +5,16 @@ import { initializeApp } from 'firebase/app'
 const ENV = import.meta.env
 
 const firebaseConfig = {
-  apiKey: ENV.FIREBASE_API_KEY,
-  authDomain: ENV.FIREBASE_AUTH_DOMAIN,
-  projectId: ENV.FIREBASE_PROJECT_ID,
-  storageBucket: ENV.FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: ENV.FIREBASE_MESSAGING_SENDER_ID,
-  appId: ENV.FIREBASE_APP_ID,
-  measurementId: ENV.FIREBASE_MEASUREMENT_ID,
+  apiKey: ENV.VITE_FIREBASE_API_KEY,
+  authDomain: ENV.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: ENV.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: ENV.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: ENV.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: ENV.VITE_FIREBASE_APP_ID,
+  measurementId: ENV.VITE_FIREBASE_MEASUREMENT_ID,
 }
 
+console.log(firebaseConfig)
 const firebaseApp = initializeApp(firebaseConfig)
 
 const firebase = getFirestore(firebaseApp)

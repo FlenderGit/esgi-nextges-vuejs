@@ -4,7 +4,7 @@ import {
   doc,
   getDoc,
   setDoc,
-  updateDoc,
+  // updateDoc,
   deleteDoc,
   Firestore,
 } from 'firebase/firestore'
@@ -21,7 +21,9 @@ export class FirestoreEntityManager<T extends Entity> extends AbstractEntityMana
   }
 
   async findAll(): Promise<T[]> {
+    console.log(this.entityName)
     const querySnapshot = await getDocs(collection(this.database, this.entityName))
+    console.log(querySnapshot)
     return querySnapshot.docs.map((doc) => doc.data() as T)
   }
 
@@ -41,11 +43,11 @@ export class FirestoreEntityManager<T extends Entity> extends AbstractEntityMana
     return { ...item, id: newDocRef.id }
   }
 
-  async update(id: string, item: T): Promise<T> {
-    const docRef = doc(this.database, this.entityName, id)
-    await updateDoc(docRef, item)
-    return { ...item, id }
-  }
+  // async update(id: string, item: Partial<T>): Promise<T> {
+  //   const docRef = doc(this.database, this.entityName, id)
+  //   await updateDoc(docRef, item)
+  //   return { ...item, id }
+  // }
 
   async delete(id: string): Promise<void> {
     const docRef = doc(this.database, this.entityName, id)

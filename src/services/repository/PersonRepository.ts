@@ -1,14 +1,14 @@
 import { Repository } from '../Repository'
-import type { Person } from '../../model/Person'
 import { db } from '../database/db'
 import type { IDatabase } from '../IDatabase'
+import type { User } from '@/model/Person'
 
-class PersonRepository extends Repository<Person> {
+class UserRepository extends Repository<User> {
   constructor(db: IDatabase) {
-    super(db, 'person')
+    super(db, 'user')
   }
 
   // Add more precise method here...
 }
 
-export const personRepo = new PersonRepository(db)
+export const userRepository = new UserRepository(db)
