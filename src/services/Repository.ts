@@ -21,9 +21,9 @@ export class Repository<T extends Entity> {
     return this.entityManager.create(item)
   }
 
-  async update(id: string, item: T): Promise<T> {
-    return this.entityManager.update(id, item)
-  }
+  // async update(id: string, item: T): Promise<T> {
+  //   return this.entityManager.update(id, item)
+  // }
 
   async delete(id: string): Promise<void> {
     return this.entityManager.delete(id)

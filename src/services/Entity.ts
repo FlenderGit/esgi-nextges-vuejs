@@ -1,1 +1,3 @@
-export type Entity = Record<string, any>
+export type Entity = {
+  id: string
+}

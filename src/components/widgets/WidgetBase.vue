@@ -23,12 +23,15 @@ defineProps({
 
 <template>
   <div
-    :style="{ gridColumn: `span ${cols}`, gridRow: `span ${rows}` }"
+    :style="{ gridColumn: `span ${cols}` }"
     class="shadow-md bg-white rounded-xl overflow-hidden relative"
     :class="{ 'px-4': withPadding, 'py-3': withPadding }">
-    <p v-if="title.trim()" class="uppercase text-neutral-400/80 text-lg font-bold">
-      {{ title }}
-    </p>
+    <div class="flex justify-between">
+      <p class="uppercase text-neutral-400/80 text-lg font-bold">
+        {{ title.trim() ?? "" }}
+      </p>
+      <slot name="actions"></slot>
+    </div>
     <slot></slot>
   </div>
 </template>

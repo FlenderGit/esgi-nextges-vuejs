@@ -1,49 +1,59 @@
 <script lang="ts">
-import WidgetBase from '../components/WidgetBase.vue'
-import NumberStat from '../components/NumberStat.vue'
+import WidgetProfileAndStats from '../components/widgets/WidgetProfileAndStats.vue'
 import Carousel from '../components/Carousel.vue'
+import WidgetBase from '../components/widgets/WidgetBase.vue'
+import WidgetNotes from '../components/widgets/WidgetNotes.vue'
+import Sidebar from '../components/Sidebar.vue'
+import { userRepository } from '../services/repository/PersonRepository.ts'
+import { useSession } from '../stores/session'
 
 export default {
+  data() {
+    return {
+      session: useSession()
+    }
+  },
+  setup() {
+    const t = userRepository.getAll().then((res) => {
+      console.log(res)
+    })
+    return {}
+  },
   components: {
+    WidgetProfileAndStats,
+    Carousel,
     WidgetBase,
-    NumberStat,
-    Carousel
+    Sidebar,
+    WidgetNotes,
   }
 }
 
 </script>
 
 <template>
+    <div class="flex">
+      <Sidebar />
+      <div class="flex-1 px-5 bg-neutral-100">
   <main>
     <div
-      style="grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); grid-template-rows: repeat(auto-fill, minmax(200px, 1fr));"
+      style="grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr)); grid-template-rows: repeat(auto-fill, minmax(200px, 1fr));"
       class="grid gap-5 grid-flow-dense h-screen overflow-y-auto pt-4">
-      <WidgetBase>
-        <div>Profile et stats, PP et Card number/stats
-          <div class="flex gap-2 justify-between">
-            <NumberStat title="Moyenne" :value="15.00" />
-            <NumberStat title="Devoirs" :value="2" />
-          </div>
-        </div>
-      </WidgetBase>
-      <WidgetBase :rows="1" :cols="2" :withPadding="false" class="relative">
+      <WidgetProfileAndStats />
+      <WidgetBase :cols="3" :withPadding="false" class="relative">
         <p class="absolute top-0 left-0 text-neutral-100 text-lg font-bold pl-4 pt-2 uppercase z-50">Actualité</p>
         <Carousel />
       </WidgetBase>
-      <WidgetBase :cols="2" :rows="2">
+      <WidgetBase :cols="2">
         <div>Calendar quotidien - Un vrai calendrier avec une zone en dessous pour avoir les cours de la journées</div>
-
       </WidgetBase>
-      <WidgetBase>
+      <WidgetBase title="Cours restants" :cols="2">
         <div>Cours de la journée cours de la journée en propre, liste colorés</div>
       </WidgetBase>
-      <WidgetBase :cols="2">
-        <div>Notes - les dernières notes parues, un voir plus</div>
-      </WidgetBase>
-      <WidgetBase :rows="3">
+      <WidgetNotes />
+      <WidgetBase :cols="3">
         <div>Planning examens les prochains examens</div>
       </WidgetBase>
-      <WidgetBase :rows="4">
+      <WidgetBase :cols="2">
         <div>Devoirs, les prochains devoirs à faire</div>
       </WidgetBase>
       <WidgetBase :cols="2">
@@ -63,4 +73,6 @@ export default {
       </WidgetBase>
     </div>
   </main>
+      </div>
+    </div>
 </template>
