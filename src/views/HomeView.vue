@@ -44,7 +44,7 @@ export default {
         <Carousel />
       </WidgetBase>
       <WidgetBase :cols="2">
-        <div>Calendar quotidien - Un vrai calendrier avec une zone en dessous pour avoir les cours de la journées</div>
+            <div>Calendar quotidien - Un vrai calendrier avec une zone en dessous pour avoir les cours de la journées -- {{ session.user.email }}</div>
       </WidgetBase>
       <WidgetBase title="Cours restants" :cols="2">
         <div>Cours de la journée cours de la journée en propre, liste colorés</div>
