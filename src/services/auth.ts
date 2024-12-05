@@ -9,8 +9,9 @@ import {
   sendEmailVerification,
   sendPasswordResetEmail,
 } from 'firebase/auth'
+import { firebaseApp } from './database/db'
 
-const auth = getAuth()
+const auth = getAuth(firebaseApp)
 
 function register(credentials: RegisterCredentials) {
   if (credentials.email && credentials.password) {
@@ -25,6 +26,10 @@ function register(credentials: RegisterCredentials) {
         console.error('register', error)
       })
   }
+}
+
+export async function logout() {
+  return await signOut(auth)
 }
 
 export async function firebase_login(credentials: Credentials): Promise<Payload> {

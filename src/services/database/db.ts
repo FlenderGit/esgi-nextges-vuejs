@@ -14,8 +14,7 @@ const firebaseConfig = {
   measurementId: ENV.VITE_FIREBASE_MEASUREMENT_ID,
 }
 
-console.log(firebaseConfig)
-const firebaseApp = initializeApp(firebaseConfig)
+export const firebaseApp = initializeApp(firebaseConfig)
 
 const firebase = getFirestore(firebaseApp)
 
