@@ -16,6 +16,7 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: LoginView,
+      meta: { requiresAuth: false },
     },
   ],
 })
@@ -27,7 +28,9 @@ const isAuthenticated = (): boolean => {
 
 router.beforeEach((to, from, next) => {
   console.log('to', to, isAuthenticated(), to.meta.requiresAuth)
-  if (to.meta.requiresAuth && !isAuthenticated()) {
+  if (to.name === 'login' && isAuthenticated()) {
+    next({ name: 'home' })
+  } else if (to.meta.requiresAuth && !isAuthenticated()) {
     next({ name: 'login' })
   } else {
     next()
