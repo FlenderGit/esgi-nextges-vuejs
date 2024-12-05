@@ -1,7 +1,13 @@
 <script>
 import SidebarButton from './SidebarButton.vue'
+import { useSession } from '@/stores/session'
 
 export default {
+  data() {
+    return {
+      session: useSession()
+    }
+  },
   components: {
     SidebarButton,
   },
@@ -15,5 +21,8 @@ export default {
       <SidebarButton icon="ic:baseline-edit-calendar" text="Home" />
       <SidebarButton icon="ic:baseline-notes" text="Search" />
     </nav>
+    <div @click="session.logout">
+      Logout
+    </div>
   </div>
 </template>

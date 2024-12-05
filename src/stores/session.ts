@@ -1,6 +1,8 @@
 import type { UserData } from '@/model/Person'
 import { defineStore } from 'pinia'
 import type { OAuth } from '@/model/Credentials'
+import router from '@/router'
+import { logout } from '@/services/auth'
 
 export interface SessionState {
   user: UserData | null
@@ -43,6 +45,9 @@ export const useSession = defineStore<'session', SessionState, {}, SessionAction
     logout() {
       this.user = null
       this.refreshToken = null
+      logout().then(() => {
+        router.push({ name: 'login' })
+      })
     },
   },
 })
