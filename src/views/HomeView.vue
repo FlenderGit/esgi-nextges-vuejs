@@ -2,6 +2,7 @@
 import WidgetProfileAndStats from '../components/widgets/WidgetProfileAndStats.vue'
 import Carousel from '../components/Carousel.vue'
 import WidgetBase from '../components/widgets/WidgetBase.vue'
+import WidgetOffer from '../components/widgets/WidgetOffer.vue'
 import WidgetClass from '../components/widgets/WidgetClass.vue'
 import WidgetNotes from '../components/widgets/WidgetNotes.vue'
 import Sidebar from '../components/Sidebar.vue'
@@ -28,7 +29,8 @@ export default {
     Sidebar,
     WidgetNotes,
     WidgetNews,
-    WidgetClass
+    WidgetClass,
+    WidgetOffer
   }
 }
 
@@ -40,13 +42,14 @@ export default {
       <div class="flex-1 px-5 bg-neutral-100">
   <main>
     <div
-      style="grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr)); grid-template-rows: repeat(auto-fill, minmax(9rem, 1fr));"
+      style="grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr)); grid-template-rows: repeat(auto-fill, minmax(8rem, 1fr));"
       class="grid gap-5 grid-flow-dense h-screen overflow-y-auto pt-4">
       <WidgetProfileAndStats />
       <WidgetBase :cols="3" :withPadding="false" class="relative">
         <p class="absolute top-0 left-0 text-neutral-100 text-lg font-bold pl-4 pt-2 uppercase z-50">Actualité</p>
         <Carousel />
       </WidgetBase>
+      <WidgetOffer />
       <WidgetClass />
       <WidgetNotes />
       <WidgetNews />
@@ -74,9 +77,6 @@ export default {
       <WidgetBase :rows="2">
         <div>Sondage, p'tit sondage fun/pro pour le campus</div>
         <p>P'tit texte de remplissage</p>
-      </WidgetBase>
-      <WidgetBase>
-        <div>Offres de stage/alternance les denrières offres, avec un voir plus</div>
       </WidgetBase>
     </div>
   </main>
