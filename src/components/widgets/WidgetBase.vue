@@ -23,8 +23,8 @@ defineProps({
 
 <template>
   <div
-    :style="{ gridColumn: `span ${cols}` }"
-    class="shadow-md bg-white rounded-xl overflow-hidden relative"
+    :style="{ gridColumn: `span ${cols}`, gridRow: `span ${rows}` }"
+    class="shadow-md bg-white rounded-xl overflow-hidden relative flex flex-col gap-2"
     :class="{ 'px-4': withPadding, 'py-3': withPadding }">
     <div class="flex justify-between">
       <p class="uppercase text-neutral-400/80 text-lg font-bold">
