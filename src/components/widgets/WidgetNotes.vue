@@ -21,6 +21,18 @@ export default {
         {
           name: "Notes 4",
           note: 6
+        },
+        {
+          name: "Notes 5",
+          note: 7
+        },
+        {
+          name: "Notes 6",
+          note: 8
+        },
+        {
+          name: "Notes 7",
+          note: 9
         }
       ]
     }
@@ -33,15 +45,15 @@ export default {
 </script>
 
 <template>
-      <WidgetBase title="Mes notes" :cols="2">
+      <WidgetBase title="Mes notes" :cols="2" :rows="2">
         <template v-slot:actions>
           <Button/>
         </template>
         <div class="grid gap-2">
           <div v-for="(note, i) in notes">
-            <div class="px-3 py-1 flex items-center gap-4 bg-neutral-100 hover:bg-neutral-200 transition-colors rounded">
-              <p class="text-xl font-bold">{{ note.note.toFixed(2) }}</p>
-              <p>{{ note.name }}</p>
+            <div class="flex justify-between items-center px-2 py-1 hover:bg-neutral-100 rounded-xl cursor-pointer">
+              <p class="font-semibold text-lg">{{ note.name }}</p>
+              <p class="text-xl">{{ note.note.toFixed(2) }}</p>
             </div>
           </div>
         </div>
