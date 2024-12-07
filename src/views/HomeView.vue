@@ -2,8 +2,11 @@
 import WidgetProfileAndStats from '../components/widgets/WidgetProfileAndStats.vue'
 import Carousel from '../components/Carousel.vue'
 import WidgetBase from '../components/widgets/WidgetBase.vue'
+import WidgetOffer from '../components/widgets/WidgetOffer.vue'
+import WidgetClass from '../components/widgets/WidgetClass.vue'
 import WidgetNotes from '../components/widgets/WidgetNotes.vue'
 import Sidebar from '../components/Sidebar.vue'
+import WidgetNews from '../components/widgets/WidgetNews.vue'
 import { userRepository } from '../services/repository/PersonRepository.ts'
 import { useSession } from '../stores/session'
 
@@ -25,6 +28,9 @@ export default {
     WidgetBase,
     Sidebar,
     WidgetNotes,
+    WidgetNews,
+    WidgetClass,
+    WidgetOffer
   }
 }
 
@@ -36,20 +42,23 @@ export default {
       <div class="flex-1 px-5 bg-neutral-100">
   <main>
     <div
-      style="grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr)); grid-template-rows: repeat(auto-fill, minmax(200px, 1fr));"
+      style="grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr)); grid-template-rows: repeat(auto-fill, minmax(8rem, 1fr));"
       class="grid gap-5 grid-flow-dense h-screen overflow-y-auto pt-4">
       <WidgetProfileAndStats />
       <WidgetBase :cols="3" :withPadding="false" class="relative">
         <p class="absolute top-0 left-0 text-neutral-100 text-lg font-bold pl-4 pt-2 uppercase z-50">Actualité</p>
         <Carousel />
       </WidgetBase>
+      <WidgetOffer />
+      <WidgetClass />
+      <WidgetNotes />
+      <WidgetNews />
       <WidgetBase :cols="2">
             <div>Calendar quotidien - Un vrai calendrier avec une zone en dessous pour avoir les cours de la journées -- {{ session.user.email }}</div>
       </WidgetBase>
       <WidgetBase title="Cours restants" :cols="2">
         <div>Cours de la journée cours de la journée en propre, liste colorés</div>
       </WidgetBase>
-      <WidgetNotes />
       <WidgetBase :cols="3">
         <div>Planning examens les prochains examens</div>
       </WidgetBase>
@@ -65,11 +74,9 @@ export default {
       <WidgetBase>
         <div>Notifications - Les alertes/warnings</div>
       </WidgetBase>
-      <WidgetBase>
+      <WidgetBase :rows="2">
         <div>Sondage, p'tit sondage fun/pro pour le campus</div>
-      </WidgetBase>
-      <WidgetBase>
-        <div>Offres de stage/alternance les denrières offres, avec un voir plus</div>
+        <p>P'tit texte de remplissage</p>
       </WidgetBase>
     </div>
   </main>
