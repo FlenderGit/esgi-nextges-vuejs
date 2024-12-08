@@ -46,7 +46,14 @@ export default defineComponent({
           content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus nec libero.",
           date: "2024-12-07",
           type: "General"
-        }
+        },
+        {
+          id: "5",
+          title: "News 5",
+          content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus nec libero.",
+          date: "2024-12-07",
+          type: "General"
+        },
       ] as News[],  // Typage des données
     };
   },
