@@ -5,4 +5,5 @@ export type User = Entity & {
   email: string
   formation: string
   school: string
+  id_group: string
 }
