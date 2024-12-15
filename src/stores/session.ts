@@ -15,7 +15,7 @@ export interface SessionActions {
 }
 
 export type Payload = {
-  user: UserData
+  user: User
   oauth: OAuth
 }
 
