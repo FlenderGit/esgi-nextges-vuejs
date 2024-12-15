@@ -2,66 +2,49 @@
 import WidgetBase from './WidgetBase.vue'
 import Button from '../Button.vue';
 import { defineComponent } from 'vue';
-
-type Class = {
-  id: string;
-  name: string;
-  place: string;
-  bloc: string;
-}
+import type { Class } from '@/model/Group'
 
 export default defineComponent({
   components: {
     WidgetBase,
     Button,
   },
-  data() {
-    return {
-      classes: [
-        {
-          id: "1",
-          name: "Elm",
-          place: "A1",
-          bloc: "1"
-        },
-        {
-          id: "2",
-          name: "UX UI",
-          place: "A2",
-          bloc: "1"
-        },
-        {
-          id: "3",
-          name: "Dev Web",
-          place: "A3",
-          bloc: "2"
-        },
-        {
-          id: "4",
-          name: "Dev Mobile",
-          place: "A4",
-          bloc: "2"
-
-        }
-      ] as Class[],
-    };
+  props: {
+    classes: {
+      type: Array as Class[],
+      required: true,
+    },
   },
+  methods: {
+    timestampToTime(timestamp: number): string {
+      const date = new Date(timestamp * 1000)
+      console.log("Date:", date); // Debug
+      console.log("Timestamp:", timestamp); // Debug
+      return date.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
+    },
+    getEndTimestamp(start: number, duration: number): number {
+      console.log("Start:", start, "Duration:", duration); // Debug
+      return start + duration * 3600
+    },
+  }
 });
 </script>
 
 <template>
-      <WidgetBase title="Mes cours" :cols="2" :rows="2">
+      <WidgetBase title="Mes cours" :cols="2" rows="2">
         <template v-slot:actions>
           <Button/>
         </template>
-        <div class="grid gap-2">
+        <div class="grid gap-1">
           <div v-for="(classe, i) in classes">
-            <div class="flex justify-between items-center">
+            <div class="flex justify-between items-center px-2 py-1 rounded-xl hover:bg-neutral-200">
               <div class="grid">
-                <p class="font-semibold text-lg">{{ classe.name }}</p>
-                <p class="text-neutral-600/80">Bloc {{ classe.bloc }}</p>
+                <p class="font-bold">{{ classe.name }}</p>
+                <p class="text-neutral-600/80 text-xs">Salle {{ classe.location }} • Bloc {{ classe.bloc }}</p>
               </div>
-              <p class="text-xs bg-sky-600 text-neutral-50 rounded-full px-3 py-1">{{ classe.place }}</p>
+            <div>
+            <p class="text-neutral-600/80 text-xs">{{ timestampToTime(classe.start) }} - {{ timestampToTime(getEndTimestamp(classe.start, classe.duration)) }}</p>
+          </div>
             </div>
           </div>
         </div>

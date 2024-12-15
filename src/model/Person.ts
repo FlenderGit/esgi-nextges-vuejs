@@ -1,10 +1,9 @@
 import type { Entity } from '@/services/Entity'
 
-export type UserData = Entity & {
-  username: string | null
-  email: string | null
-}
-
-export type User = UserData & {
-  courses: string[]
+export type User = Entity & {
+  name: string
+  email: string
+  formation: string
+  school: string
+  id_group: string
 }

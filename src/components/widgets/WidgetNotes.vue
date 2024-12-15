@@ -3,36 +3,41 @@ import WidgetBase from './WidgetBase.vue'
 import Button from '../Button.vue'
 
 export default {
+  methods: {
+    randomNote() {
+      return Math.floor(Math.random() * 20)
+    }
+  },
   data() {
     return {
       notes: [
         {
-          name: "Notes 1",
-          note: 3,
+          name: "Elm",
+          note: this.randomNote()
         },
         {
-          name: "Notes 2",
-          note: 4
+          name: "UI Design",
+          note: this.randomNote()
         },
         {
-          name: "Notes 3",
-          note: 5
+          name: "Projet annuel",
+          note: this.randomNote()
         },
         {
-          name: "Notes 4",
-          note: 6
+          name: "Svelte",
+          note: this.randomNote()
         },
         {
-          name: "Notes 5",
-          note: 7
+          name: "Rust advanced",
+          note: this.randomNote()
         },
         {
-          name: "Notes 6",
-          note: 8
+          name: "React",
+          note: this.randomNote()
         },
         {
-          name: "Notes 7",
-          note: 9
+          name: "Gleam",
+          note: this.randomNote()
         }
       ]
     }
@@ -45,15 +50,15 @@ export default {
 </script>
 
 <template>
-      <WidgetBase title="Mes notes" :cols="2" :rows="2">
+      <WidgetBase title="Dernières notes" :cols="2" :rows="2">
         <template v-slot:actions>
           <Button/>
         </template>
         <div class="grid gap-2">
           <div v-for="(note, i) in notes">
             <div class="flex justify-between items-center px-2 py-1 hover:bg-neutral-100 rounded-xl cursor-pointer">
-              <p class="font-semibold text-lg">{{ note.name }}</p>
-              <p class="text-xl">{{ note.note.toFixed(2) }}</p>
+              <p class="font-semibold">{{ note.name }}</p>
+              <p class="">{{ note.note.toFixed(2) }}</p>
             </div>
           </div>
         </div>
