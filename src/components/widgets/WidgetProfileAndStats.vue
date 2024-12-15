@@ -30,7 +30,7 @@ export default {
           </div>
           <div class="flex flex-col">
           <p class="font-semibold text-lg">{{ session.user.name ?? emailToNames(session.user.email) }}</p>
-          <p class="text-neutral-600/80 text-sm">Informatique • ESGI Mastère 1</p>
+          <p class="text-neutral-600/80 text-sm">{{ session.user.school }} • {{ session.user.formation }}</p>
           </div>
         </div>
         <div class="flex flex-col gap-1">
