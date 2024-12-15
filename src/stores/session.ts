@@ -1,11 +1,11 @@
-import type { UserData } from '@/model/Person'
+import type { User } from '@/model/Person'
 import { defineStore } from 'pinia'
 import type { OAuth } from '@/model/Credentials'
 import router from '@/router'
 import { logout } from '@/services/auth'
 
 export interface SessionState {
-  user: UserData | null
+  user: User | null
   refreshToken: string | null
 }
 
