@@ -44,13 +44,16 @@ export async function firebase_login(credentials: Credentials): Promise<Payload>
         credentials.password,
       )
 
-      console.log('login', userCredential)
-
       const accessToken = await userCredential.user.getIdToken()
       const refreshToken = userCredential.user.refreshToken
       const id = userCredential.user.uid
 
       const user = await userRepository.getById(id)
+
+      if (!user) {
+        throw new Error('User not found')
+      }
+
       return {
         user,
         oauth: {
