@@ -10,6 +10,7 @@ import {
   sendPasswordResetEmail,
 } from 'firebase/auth'
 import { firebaseApp } from './database/db'
+import { userRepository } from './repository/PersonRepository'
 
 const auth = getAuth(firebaseApp)
 
@@ -48,15 +49,10 @@ export async function firebase_login(credentials: Credentials): Promise<Payload>
       const accessToken = await userCredential.user.getIdToken()
       const refreshToken = userCredential.user.refreshToken
       const id = userCredential.user.uid
-      const email = userCredential.user.email
-      const username = userCredential.user.displayName
 
+      const user = await userRepository.getById(id)
       return {
-        user: {
-          id,
-          email,
-          username,
-        },
+        user,
         oauth: {
           accessToken,
           refreshToken,
