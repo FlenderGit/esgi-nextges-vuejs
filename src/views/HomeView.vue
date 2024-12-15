@@ -6,24 +6,46 @@ import WidgetBase from '../components/widgets/WidgetBase.vue'
 import WidgetCalendar from '../components/widgets/WidgetCalendar.vue'
 import WidgetWarning from '../components/widgets/WidgetWarning.vue'
 import WidgetOffer from '../components/widgets/WidgetOffer.vue'
+import WidgetNotifications from '../components/widgets/WidgetNotifications.vue'
 import WidgetClass from '../components/widgets/WidgetClass.vue'
 import WidgetNotes from '../components/widgets/WidgetNotes.vue'
 import Sidebar from '../components/Sidebar.vue'
 import WidgetNews from '../components/widgets/WidgetNews.vue'
 import { userRepository } from '../services/repository/PersonRepository.ts'
+import { eventRepository } from '../services/repository/EventsRepository.ts'
+import { offerRepository } from '../services/repository/OfferRepository.ts'
 import { useSession } from '../stores/session'
+import { ref } from 'vue'
 
 export default {
-  data() {
-    return {
-      session: useSession()
-    }
-  },
   setup() {
+    const events = ref([])
+    const session = useSession()
+    const loading_events = ref(true)
     const t = userRepository.getAll().then((res) => {
       console.log(res)
     })
-    return {}
+
+    const offer = ref([])
+    const loading_offers = ref(true)
+    offerRepository.getAll().then((res) => {
+      console.log(res)
+      offer.value = res
+      loading_offers.value = false
+    })
+
+    eventRepository.getAll().then((res) => {
+      console.log(res)
+      events.value = res
+      loading_events.value = false
+    })
+    return {
+      events,
+      loading_events,
+      offer,
+      loading_offers,
+      t
+    }
   },
   components: {
     WidgetProfileAndStats,
@@ -31,6 +53,7 @@ export default {
     WidgetDocuments,
     WidgetBase,
     WidgetWarning,
+    WidgetNotifications,
     Sidebar,
     WidgetNotes,
     WidgetNews,
@@ -46,22 +69,23 @@ export default {
     <div class="flex">
       <Sidebar />
       <div class="flex-1 px-5 bg-neutral-100">
-  <main>
+  <main class="h-screen overflow-y-auto">
     <div
-      style="grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr)); grid-template-rows: repeat(auto-fill, minmax(8rem, 1fr));"
-      class="grid gap-5 grid-flow-dense h-screen overflow-y-auto pt-4">
+      style="grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr)); grid-auto-rows: 1fr;"
+      class="grid gap-5 grid-flow-dense overflow-y-auto pt-4">
       <WidgetProfileAndStats />
       <WidgetBase :cols="3" :rows="2" :withPadding="false" class="relative">
-        <p class="absolute top-0 left-0 text-neutral-100 text-lg font-bold pl-4 pt-2 uppercase z-50">Actualité</p>
         <Carousel />
       </WidgetBase>
-      <WidgetOffer />
       <WidgetClass />
-      <WidgetNotes />
-      <WidgetNews />
-      <WidgetWarning />
       <WidgetCalendar />
+      <WidgetNotes />
+
+      <WidgetNews :loading="loading_events" :news="events" />
+      <WidgetWarning />
+      <WidgetNotifications />
       <WidgetDocuments />
+      <WidgetOffer :loading="loading_offers" :offers="offer" />
       <!-- <WidgetBase title="Cours restants" :cols="2"> -->
       <!--   <div>Cours de la journée cours de la journée en propre, liste colorés</div> -->
       <!-- </WidgetBase> -->
