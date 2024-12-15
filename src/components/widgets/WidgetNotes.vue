@@ -3,33 +3,42 @@ import WidgetBase from './WidgetBase.vue'
 import Button from '../Button.vue'
 
 export default {
+  methods: {
+    randomNote() {
+      return Math.floor(Math.random() * 20)
+    }
+  },
   data() {
     return {
       notes: [
         {
-          name: "Notes 1",
-          note: 3,
+          name: "Elm",
+          note: this.randomNote()
         },
         {
-          name: "Notes 2",
-          note: 4
+          name: "UI Design",
+          note: this.randomNote()
         },
         {
-          name: "Notes 3",
-          note: 5
+          name: "Projet annuel",
+          note: this.randomNote()
         },
         {
-          name: "Notes 4",
-          note: 6
+          name: "Svelte",
+          note: this.randomNote()
         },
         {
-          name: "Notes 5",
-          note: 7
+          name: "Rust advanced",
+          note: this.randomNote()
         },
         {
-          name: "Notes 6",
-          note: 8
+          name: "React",
+          note: this.randomNote()
         },
+        {
+          name: "Gleam",
+          note: this.randomNote()
+        }
       ]
     }
   },
