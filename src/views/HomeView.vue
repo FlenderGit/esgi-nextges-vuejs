@@ -14,6 +14,8 @@ import WidgetNews from '../components/widgets/WidgetNews.vue'
 import { userRepository } from '../services/repository/PersonRepository.ts'
 import { eventRepository } from '../services/repository/EventsRepository.ts'
 import { offerRepository } from '../services/repository/OfferRepository.ts'
+import { groupRepository } from '../services/repository/GroupRepository.ts'
+import { useGroupStore } from '../stores/group.ts'
 import { useSession } from '../stores/session'
 import { ref } from 'vue'
 
@@ -22,10 +24,6 @@ export default {
     const events = ref([])
     const session = useSession()
     const loading_events = ref(true)
-    const t = userRepository.getAll().then((res) => {
-      console.log(res)
-    })
-
     const offer = ref([])
     const loading_offers = ref(true)
     offerRepository.getAll().then((res) => {
@@ -39,12 +37,35 @@ export default {
       events.value = res
       loading_events.value = false
     })
+
+    const ig= session.user.id_group
+    const group_store = useGroupStore()
+
+    const loading_group = ref(true)
+    groupRepository.getById(ig).then((res) => {
+      console.log(res)
+      loading_group.value = false
+      res = {
+        ...res,
+        classes: res.classes.map((classe) => {
+          return {
+            ...classe,
+            start: classe.start.seconds
+          }
+        })
+      }
+      group_store.setGroup(res)
+    })
+
+
     return {
       events,
       loading_events,
       offer,
+      session,
+      group_store,
       loading_offers,
-      t
+      loading_group
     }
   },
   components: {
@@ -77,7 +98,7 @@ export default {
       <WidgetBase :cols="3" :rows="2" :withPadding="false" class="relative">
         <Carousel />
       </WidgetBase>
-      <WidgetClass />
+          <WidgetClass :loading="loading_group" :classes="group_store.group.classes" />
       <WidgetCalendar />
       <WidgetNotes />
 
