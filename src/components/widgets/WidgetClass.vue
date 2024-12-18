@@ -22,10 +22,6 @@ export default defineComponent({
       console.log("Timestamp:", timestamp); // Debug
       return date.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
     },
-    getEndTimestamp(start: number, duration: number): number {
-      console.log("Start:", start, "Duration:", duration); // Debug
-      return start + duration * 3600
-    },
   }
 });
 </script>
@@ -43,7 +39,7 @@ export default defineComponent({
                 <p class="text-neutral-600/80 text-xs">Salle {{ classe.location }} • Bloc {{ classe.bloc }}</p>
               </div>
             <div>
-            <p class="text-neutral-600/80 text-xs">{{ timestampToTime(classe.start) }} - {{ timestampToTime(getEndTimestamp(classe.start, classe.duration)) }}</p>
+            <p class="text-neutral-600/80 text-xs">{{ timestampToTime(classe.start) }} - {{ timestampToTime(classe.end) }}</p>
           </div>
             </div>
           </div>
