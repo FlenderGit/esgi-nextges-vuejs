@@ -1,7 +1,6 @@
 <template>
-  <div class="grid justify-items-center text-red-50 size-12 mx-auto hover:bg-cyan-300/20 rounded transition-colors" :title="text">
+  <div class="flex justify-center items-center text-red-50 size-12 mx-auto hover:bg-cyan-300/20 rounded transition-colors" :title="text">
     <Icon :icon="icon" class="size-9" />
-    <!-- <p class="text-xs">Text</p> -->
   </div>
 </template>
 
