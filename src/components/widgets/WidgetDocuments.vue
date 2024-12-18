@@ -40,8 +40,8 @@ export default defineComponent({
         {
           id: "5",
           title: "Document 5",
-          class: "Dev Mobile",
-        }
+          class: "Elm",
+        },
       ] as Document[],
     };
   },
@@ -52,7 +52,7 @@ export default defineComponent({
   <WidgetBase title="Documents" :cols="2" :rows="2">
     <div class="grid gap-2">
       <div v-for="(doc, i) in documents">
-        <div class="flex gap-1 items-center">
+        <div class="flex gap-1 cursor-pointer items-center rounded-xl hover:bg-neutral-200 px-2 py-1">
           <Icon icon="akar-icons:file" class="size-8 text-neutral-500"/>
           <div class="flex flex-col">
             <p class="font-semibold">{{ doc.title }}</p>

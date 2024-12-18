@@ -23,7 +23,7 @@ export default {
 
 <template>
     <WidgetBase :cols="2" :rows="1">
-      <div class="flex flex-col gap-1">
+      <div class="flex flex-col gap-1 justify-center">
         <div class="flex gap-2 items-center">
           <div class="size-12 bg-neutral-100 rounded-full">
             <img src="https://avatar.iran.liara.run/public" alt="profile" class="rounded-full" />
