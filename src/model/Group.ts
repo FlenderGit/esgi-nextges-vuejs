@@ -9,7 +9,7 @@ export type Group = Entity & {
 export type Class = {
   name: string
   start: string
-  duration: number
+  end: string
   room: string
   bloc: string
 }
