@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
+import NotesVue from '../views/NotesView.vue'
+import PlanningView from '../views/PlanningView.vue'
 import { useSession } from '@/stores/session'
 
 const router = createRouter({
@@ -17,6 +19,18 @@ const router = createRouter({
       name: 'login',
       component: LoginView,
       meta: { requiresAuth: false },
+    },
+    {
+      path: '/planning',
+      name: 'planning',
+      component: PlanningView,
+      meta: { requiresAuth: true },
+    },
+    {
+      path: '/notes',
+      name: 'notes',
+      component: NotesVue,
+      meta: { requiresAuth: true },
     },
   ],
 })
