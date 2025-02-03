@@ -1,9 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import LoginView from '../views/LoginView.vue'
-import NotesVue from '../views/NotesView.vue'
-import PlanningView from '../views/PlanningView.vue'
 import { useSession } from '@/stores/session'
+
+const DEFAULT_ROUTE = { name: 'home' }
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -11,26 +9,37 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView,
+      component: () => import('../views/HomeView.vue'),
       meta: { requiresAuth: true },
     },
     {
       path: '/login',
       name: 'login',
-      component: LoginView,
+      component: () => import('../views/LoginView.vue'),
       meta: { requiresAuth: false },
     },
     {
       path: '/planning',
       name: 'planning',
-      component: PlanningView,
+      component: () => import('../views/PlanningView.vue'),
       meta: { requiresAuth: true },
     },
     {
       path: '/notes',
       name: 'notes',
-      component: NotesVue,
+      component: () => import('../views/NotesView.vue'),
       meta: { requiresAuth: true },
+    },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: () => import('../views/AdminView.vue'),
+      meta: { requiresAuth: true, requiresAdmin: true },
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'not-found',
+      component: () => import('../views/NotFoundView.vue'),
     },
   ],
 })
@@ -41,13 +50,17 @@ const isAuthenticated = (): boolean => {
 }
 
 router.beforeEach((to, from, next) => {
-  console.log('to', to, isAuthenticated(), to.meta.requiresAuth)
   if (to.name === 'login' && isAuthenticated()) {
-    next({ name: 'home' })
+    next(DEFAULT_ROUTE)
   } else if (to.meta.requiresAuth && !isAuthenticated()) {
     next({ name: 'login' })
-  } else {
+  } else if (
+    !to.meta.requiresAdmin ||
+    (to.meta.requiresAdmin && useSession().user?.name === 'admin')
+  ) {
     next()
+  } else {
+    next(DEFAULT_ROUTE)
   }
 })
 
