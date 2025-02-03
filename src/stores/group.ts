@@ -3,9 +3,9 @@ import { defineStore } from 'pinia'
 import type { Group } from '@/model/Group'
 
 export const useGroupStore = defineStore('group', () => {
-  const group = ref([])
+  const group = ref<Group | null>(null)
 
-  function setGroup(newGroup: any) {
+  function setGroup(newGroup: Group) {
     group.value = newGroup
   }
 

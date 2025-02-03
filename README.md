@@ -1,45 +1,26 @@
-# vue-myges
+# NextGes
 
-This template should help get you started developing with Vue 3 in Vite.
+Version 1.0 - Par DELOEIL Tristan
 
-## Recommended IDE Setup
+## Description
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+NextGes-vuejs est l'application Web écrite en VueJS de NextGes. Celle-ci est une application servant d'intranet pour un établissement scolaire. Sur cette application, il est possible de voir ses cours, les notes, les événements à venir sur le campus et les offres de stages et d'alternances recommandés par l'école.
 
-## Type Support for `.vue` Imports in TS
+## Description structure
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+Ce projet utilise la structure de fichier suivantes.
 
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-npm run test:unit
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+- /src
+  - /assets: Le fichier contenant les assets, ici le fichier `style.css` contenant le style généré par TailwindCSS
+  - /components: Tous les composants VueJS/
+    - /widgets: Les widgets utilisés sur la page home de l'application
+    - /icons: Les icons utilisées sur l'application
+  - /model: Les models/types de données, utilisés par TypeScript
+  - /router: La configuration du router
+  - /service: Différents outils/fonction pour faire fonctionner l'application
+    - /database: La configuration de la base de données et les classes de base pour implémenter une autre base de données.
+    - /repository: Les fichiers répository pour tous les entités de la base de données
+    - auth.ts: Les fonctions de base pour intéragir avec l'authentification Firebase.
+  - /store: Les différents stores de données nécéssaires à l'application
+  - /view: Les views/pages de l'application
+  - tailwind.css: Le point d'entré pour TaiwindCSS
