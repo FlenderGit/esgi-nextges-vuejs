@@ -24,6 +24,12 @@ export default {
         text="Home"
         @click="$router.push('/planning')"
       />
+      <SidebarButton
+        :only-admin="true"
+        icon="material-symbols:admin-panel-settings-outline"
+        text="Admin"
+        @click="$router.push('/admin')"
+      />
       <SidebarButton icon="ic:outline-logout" text="Logout" @click="session.logout" />
     </nav>
   </div>
