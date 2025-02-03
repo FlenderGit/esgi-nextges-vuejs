@@ -55,6 +55,7 @@ export default {
         })
       }
       group_store.setGroup(res)
+      console.log("Group store:", group_store); // Debug
     })
 
 
@@ -99,7 +100,7 @@ export default {
         <Carousel />
       </WidgetBase>
           <WidgetClass :loading="loading_group" :classes="group_store.group.classes" />
-      <WidgetCalendar />
+      <WidgetCalendar :loading="loading_group" :classes="group_store.group.classes" />
       <WidgetNotes />
 
       <WidgetNews :loading="loading_events" :news="events" />

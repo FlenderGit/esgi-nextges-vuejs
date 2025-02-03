@@ -1,13 +1,10 @@
 import type { Credentials, RegisterCredentials } from '@/model/Credentials'
-import type { OAuth } from '@/model/Credentials'
 import type { Payload } from '@/stores/session'
 import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
-  sendEmailVerification,
-  sendPasswordResetEmail,
 } from 'firebase/auth'
 import { firebaseApp } from './database/db'
 import { userRepository } from './repository/PersonRepository'
@@ -18,13 +15,13 @@ function register(credentials: RegisterCredentials) {
   if (credentials.email && credentials.password) {
     return createUserWithEmailAndPassword(auth, credentials.email, credentials.password)
       .then((userCredential) => {
-        console.log('register', userCredential)
+        console.log('register_match', userCredential)
         return userCredential.user.updateProfile({
           displayName: credentials.username,
         })
       })
       .catch((error) => {
-        console.error('register', error)
+        console.error('register_failed', error)
       })
   }
 }
