@@ -6,7 +6,7 @@ export type Group = Entity & {
   documents: Document[]
 }
 
-export type Class = {
+export type Class = Entity & {
   name: string
   start: string
   end: string

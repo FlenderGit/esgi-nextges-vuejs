@@ -4,10 +4,14 @@ import { CalendarView } from 'vue-simple-calendar'
 import Sidebar from '../components/Sidebar.vue'
 import { useGroupStore } from '../stores/group'
 import { ref } from 'vue'
+import { useSession } from '../stores/session'
 
 // Import the styles
 import '../../node_modules/vue-simple-calendar/dist/style.css'
 import '../../node_modules/vue-simple-calendar/dist/css/default.css'
+import FormCourse from '@/components/forms/FormCourse.vue'
+import type { Class } from '@/model/Group'
+import { classRepository } from '@/services/repository/ClassRepository'
 
 export default defineComponent({
   setup() {
@@ -15,10 +19,14 @@ export default defineComponent({
     const group_store = useGroupStore()
     const classes = group_store.group?.classes ?? []
     const date = ref(new Date())
+    const session = useSession()
+    const is_class_modal_showed = ref(false)
     return {
       classes,
       loading,
       showDate: date,
+      session,
+      is_class_modal_showed,
     }
   },
   components: {
@@ -42,6 +50,9 @@ export default defineComponent({
         year: 'numeric',
       })
     },
+    is_admin() {
+      return this.session.user?.role === 'admin'
+    },
   },
   methods: {
     goNext() {
@@ -51,6 +62,14 @@ export default defineComponent({
     goPrev() {
       this.showDate = new Date(this.showDate.getFullYear(), this.showDate.getMonth() - 1, 1)
       console.log(this.showDate)
+    },
+    handleCreateCourse(course: Class) {
+      this.is_class_modal_showed = false
+      this.loading = true
+      classRepository.create(course).then(() => {
+        this.loading = false
+        this.classes.push(course)
+      })
     },
   },
 })
@@ -87,6 +106,13 @@ export default defineComponent({
               >
                 Mois suivant
               </button>
+              <button
+                v-if="is_admin"
+                v-on:click="is_class_modal_showed = true"
+                class="bg-green-500 text-white px-4 py-2 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-green-500"
+              >
+                Ajouter un cours
+              </button>
             </div>
           </div>
         </div>
@@ -95,5 +121,8 @@ export default defineComponent({
         </div>
       </main>
     </div>
+  </div>
+  <div v-show="is_class_modal_showed">
+    <FormCourse :course="null" @submit="handleCreateCourse" />
   </div>
 </template>
