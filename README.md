@@ -6,6 +6,11 @@ Version 1.0 - Par DELOEIL Tristan
 
 NextGes-vuejs est l'application Web écrite en VueJS de NextGes. Celle-ci est une application servant d'intranet pour un établissement scolaire. Sur cette application, il est possible de voir ses cours, les notes, les événements à venir sur le campus et les offres de stages et d'alternances recommandés par l'école.
 
+## Preview
+[![The preview](https://img.youtube.com/vi/lJeE0BsAI9w/0.jpg)](https://youtu.be/lJeE0BsAI9w))]
+
+A simple preview to show some app fonctionnalities.
+
 ## Description structure
 
 Ce projet utilise la structure de fichier suivantes.
